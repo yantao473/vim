@@ -29,7 +29,8 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""
 "set guifont
 " set guifont=Consolas:h13:cANSI
-set guifont=DejaVu\ Sans\ Mono:h13:cANSI
+" set guifont=DejaVu\ Sans\ Mono:h13:cANSI
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h13:cANSI
 
 "Get out of VI's compatible mode.
 set nocp
@@ -133,7 +134,7 @@ if !exists("g:vimrc_loaded")
         set guioptions-=L
         set guioptions-=r
     endif " has
-        colorscheme ir_black
+        colorscheme darkblue_my
 endif " exists(...)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -288,44 +289,6 @@ endif
 " Plugin configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-""""""""""""""""""""""""""""""
-" lookupfile setting
-""""""""""""""""""""""""""""""
-" let g:LookupFile_MinPatLength = 2               "最少输入2个字符才开始查找
-" let g:LookupFile_PreserveLastPattern = 0        "不保存上次查找的字符串
-" let g:LookupFile_PreservePatternHistory = 1     "保存查找历史
-" let g:LookupFile_AlwaysAcceptFirst = 1          "回车打开第一个匹配项目
-" let g:LookupFile_AllowNewFiles = 0              "不允许创建不存在的文件
-
-" if filereadable("./filenametags")                "设置tag文件的名字
-    " let g:LookupFile_TagExpr = '"./filenametags"'
-" endif
-
-" " lookup file with ignore case
-" function! LookupFile_IgnoreCaseFunc(pattern)
-    " let _tags = &tags
-    " try
-        " let &tags = eval(g:LookupFile_TagExpr)
-        " let newpattern = '\c' . a:pattern
-        " let tags = taglist(newpattern)
-    " catch
-        " echohl ErrorMsg | echo "Exception: " . v:exception | echohl NONE
-        " return ""
-    " finally
-        " let &tags = _tags
-    " endtry
-
-    " " Show the matches for what is typed so far.
-    " let files = map(tags, 'v:val["filename"]')
-    " return files
-" endfunction
-" let g:LookupFile_LookupFunc = 'LookupFile_IgnoreCaseFunc' 
-
-" nmap <silent> <leader>lk :LUTags<cr>
-" nmap <silent> <leader>ll :LUBufs<cr>
-" nmap <silent> <leader>lw :LUWalk<cr>
-
-
 """""""""""""""""""""""""""""""
 " Vim section
 """""""""""""""""""""""""""""""
@@ -370,25 +333,69 @@ endfunction
 au filetype php map <F5> :call CheckPHPSyntax()<CR>
 au filetype php imap <F5> <ESC>:call CheckPHPSyntax()<CR>
 
-" for neocomplcache
-let g:neocomplcache_enable_at_startup = 1 
+"************************ for neocomplcache  **********************"
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_enable_auto_select = 1
+let g:neocomplcache_enable_quick_match = 1
+let g:neocomplcache_min_syntax_length = 2
+
+" Enable omni completion. 
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS 
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags 
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS 
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete 
+" autocmd FileType javascript set dictionary+=$VIM/vimfiles/vundle/javascript.dict
+"************************ for neocomplcache  **********************"
+"***************************start airline******************************"
+" let g:airline_theme="luna" 
+let g:airline_theme="powerlineish" 
+
+"这个是安装字体后 必须设置此项" 
+let g:airline_powerline_fonts = 1   
+
+" 打开tabline功能,方便查看Buffer和切换,省去了minibufexpl插件"
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+" let g:airline#extensions#tabline#show_close_button = 1
+" let g:airline#extensions#tabline#close_symbol = 'X'
+
+" let g:airline#extensions#branch#enabled = 1
+" let g:airline#extensions#branch#empty_message = ''
+
+"设置切换Buffer快捷键"
+nnoremap <C-N> :bn<CR>
+nnoremap <C-P> :bp<CR>
+
+" 关闭状态显示空白符号计数"
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#whitespace#symbol = '!'
+
+"***************************end airline******************************
+
+" jsx config
+" let g:jsx_ext_required = 0
+" let g:jsx_pragma_required = 1
+
+" for check javascript syntax
+" au filetype javascript map <F2> <ESC> :JSHint<CR>
+
 
 " install  git clone https://github.com/gmarik/Vundle.vim.git
-set rtp+=d:/vim/vimfiles/vundle/Vundle.vim
-let path='d:/vim/vimfiles/vundle'
+set rtp+=$VIM/vimfiles/vundle/Vundle.vim
+let path=$VIM.'/vimfiles/vundle'
 call vundle#begin(path)
-
 Plugin 'gmarik/Vundle.vim'
-" Plugin 'L9'
-" Plugin 'genutils'
-" Plugin 'lookupfile'
+Plugin 'L9'
+Plugin 'genutils'
 Plugin 'fugitive.vim'
 Plugin 'Emmet.vim'
 Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'vim-scripts/matchit.zip'
 Plugin 'Shougo/neocomplcache'
+Plugin 'pathogen.vim'
 call vundle#end()
