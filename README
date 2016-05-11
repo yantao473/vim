@@ -1,0 +1,5 @@
+1. 安装gvim，假设安装路径为d:/vim(如果不是请将_vimrc中的路径修改，最好路径中不要带空格)
+2. 将vimtweak.dll copy到d:/vim/vim74/下
+3. 将_vimrc copy到d:/vim下
+4. 安装字体
+
