@@ -341,12 +341,14 @@ let g:neocomplcache_enable_quick_match = 1
 let g:neocomplcache_min_syntax_length = 2
 
 " Enable omni completion. 
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS 
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags 
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS 
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete 
+" autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS 
+" autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags 
+" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS 
+" autocmd FileType python setlocal omnifunc=pythoncomplete#Complete 
+" autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 " autocmd FileType javascript set dictionary+=$VIM/vimfiles/vundle/javascript.dict
 "************************ for neocomplcache  **********************"
+
 "***************************start airline******************************"
 " let g:airline_theme="luna" 
 let g:airline_theme="powerlineish" 
@@ -372,6 +374,9 @@ let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#symbol = '!'
 
 "***************************end airline******************************
+"***************************start python******************************"
+let python_highlight_all=1
+"***************************end python******************************"
 
 " jsx config
 " let g:jsx_ext_required = 0
@@ -385,6 +390,7 @@ let g:airline#extensions#whitespace#symbol = '!'
 set rtp+=$VIM/vimfiles/vundle/Vundle.vim
 let path=$VIM.'/vimfiles/vundle'
 call vundle#begin(path)
+
 Plugin 'gmarik/Vundle.vim'
 Plugin 'L9'
 Plugin 'genutils'
